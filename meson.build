@@ -54,6 +54,7 @@ subdir('build/compiler/check-and-apply-flags')
 
 # Include reusable build modules here via subdir() calls
 subdir('build/linker/linker-map')
+subdir('build/test/cmocka')
 subdir('build/objcopy')
 
 #######################
