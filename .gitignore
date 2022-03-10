@@ -1,29 +1,48 @@
-*~
-*.l[oa]
-*.[oa]
-buildresults/
-compile
-xQtest
-/autom4te.cache
-/COPYING
-/Makefile.in
-/acconf.h.in
-/aclocal.m4
-/configure
-/m4/
-/INSTALL
-/.deps/
-/.libs/
-/acconf.h
-/arith.h
-/config.guess
-/config.log
-/config.status
-/config.sub
-/depcomp
-/gd_qnan.h
-/install-sh
-/libtool
-/ltmain.sh
-/missing
-/stamp-h1
+cscope*out
+*.sublime-workspace
+.DS_Store
+
+# Generated folders
+buildresults*
+build/gen/**
+
+# Meson subprojects
+**/subprojects/**
+!**/subprojects/*.wrap
+
+# Patch file
+clang_format.patch
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
