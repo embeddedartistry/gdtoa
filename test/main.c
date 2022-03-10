@@ -17,5 +17,7 @@ int main(void)
 {
 	int overall_result = 0;
 
+	overall_result |= dt_tests();
+
 	return overall_result;
 }

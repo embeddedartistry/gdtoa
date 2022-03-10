@@ -2,17 +2,20 @@
 # gdtoa tests #
 ###############
 
-gdtoa_dt = executable('gdtoa_dt',
-	'original_programs/dt.c',
-	dependencies: gdtoa_temporary_dep,
-	native: true,
-	build_by_default: meson.is_subproject() == false
-)
+#gdtoa_dt = executable('gdtoa_dt',
+#	'original_programs/dt.c',
+#	dependencies: gdtoa_temporary_dep,
+#	native: true,
+#	build_by_default: meson.is_subproject() == false
+#)
 
 gdtoa_tests = executable('gdtoa_test',
 	sources: [
-		'main.c'
+		'main.c',
+		'dt.c',
+		'ulps/ulpsDistance.c'
 	],
+	include_directories: include_directories('ulps'),
 	dependencies: [
 		cmocka_native_dep,
 		gdtoa_temporary_dep
