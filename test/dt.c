@@ -122,23 +122,15 @@ static void dt_test(void** state)
 		assert_true(errno == test_values[i].expected_errno);
 
 		s = dtoa(strtod_conv, test_values[i].dtoa_mode, test_values[i].dtoa_digits, &dcept, &sign, &se);
-		int64_t conv_int, expected_int;
-		memcpy(&conv_int, &strtod_conv, sizeof(double));
-		memcpy(&expected_int, &test_values[i].f, sizeof(double));
 		printf("sign: %d, dcept: %d, num_digits: %ld, digits: %s\n", sign, dcept, se - s, s);
 		printf("EXPECTED sign: %d, dcept: %d, num_digits: %d, digits: %s\n", test_values[i].sign, test_values[i].dcept, test_values[i].num_digits, test_values[i].digits);
-		printf("i: %zu, strtod: 0x%llx, expected: 0x%llx, distance: %lld, errno: %d (%s)\n", i, conv_int, expected_int, ulpsDistanceDouble(strtod_conv, test_values[i].f), errno, errno == 0? "OK" : strerror(errno));
-
 		assert_true(sign == test_values[i].sign);
 		assert_true(dcept == test_values[i].dcept);
 		assert_true((se - s) == test_values[i].num_digits);
 		assert_true(0 == strcmp(s, test_values[i].digits));
 		assert_true(ulpsDistanceDouble(strtod_conv, test_values[i].f) < 2);
 	}
-
 }
-
-
 
 int dt_tests()
 {
