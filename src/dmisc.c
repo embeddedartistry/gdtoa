@@ -82,10 +82,15 @@ char* nrv_alloc(const char* s, char** rve, int n)
  * when MULTIPLE_THREADS is not defined.
  */
 
+#include <stdio.h>
 void freedtoa(char* s)
 {
-	Bigint* b = (Bigint*)((void*)(s - sizeof(int*)));
+	printf("freedtoa with char* 0x%llx\n", (uint64_t)s);
+	Bigint* b = (Bigint *)((int *)(void*)s - 1);
+	printf("b = 0x%llx\n", (uint64_t)b);
+	printf("b->maxwds prev: %d, deref b: %d\n", b->maxwds, *(int*)b);
 	b->maxwds = 1 << (b->k = *(int*)b);
+	printf("b->maxwds = %d, b->k = %d\n", b->maxwds, b->k);
 	Bfree(b);
 #ifndef MULTIPLE_THREADS
 	if(s == dtoa_result)
