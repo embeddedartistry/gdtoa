@@ -20,6 +20,9 @@ gdtoa_tests = executable('gdtoa_test',
 		cmocka_native_dep,
 		gdtoa_temporary_dep
 	],
+	c_args:[
+		'-DDEBUG',
+	],
 	link_args: [
 		native_map_file.format(meson.current_build_dir() + '/gdtoa_test'),
 	],
