@@ -38,16 +38,11 @@ static struct
 	int expected_errno;
 } test_values[] = {
 	// Default Mode:NumDigits tests (0:17)
-	// Bug - when this is enabled, semgentation fault happens at a later test case
-	//{"1.23", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23, 0, 1, 3, "123", 0},
-	// Bug - when this is enabled, semgentation fault happens at a later test case
-	//{"1.23e+20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 123000000000000000000.0, 0, 21, 3, "123", 0},
-	// Bug - when this is enabled, semgentation fault happens at a later test case
-	//{"1.23e-20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e-20, 0, -19, 3, "123", 0},
-	// Bug - when this is enabled, segmentation fault happens at a later test case
-	//{"1.23456789", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23456789, 0, 1, 9, "123456789", 0},
-	// Bug - when this is enabled, segmentation fault happens at a later test case
-	//{"1.23456589e+20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23456589e+20, 0, 21, 9, "123456589", 0},
+	{"1.23", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23, 0, 1, 3, "123", 0},
+	{"1.23e+20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 123000000000000000000.0, 0, 21, 3, "123", 0},
+	{"1.23e-20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e-20, 0, -19, 3, "123", 0},
+	{"1.23456789", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23456789, 0, 1, 9, "123456789", 0},
+	{"1.23456589e+20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23456589e+20, 0, 21, 9, "123456589", 0},
 	{"1.23e+30", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e+30, 0, 31, 3, "123", 0},
 	{"1.23e-30", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e-30, 0, -29, 3, "123", 0},
 	{"1.23456789e-20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23456789e-20, 0, -19, 9, "123456789", 0},
@@ -57,7 +52,7 @@ static struct
 	// Bug - bus error
 	//{"1.23456789012345678901234567890123456789", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23456789012345678901234567890123456789, 0, 1, 17, "12345678901234567", 0},
 	// Bug - segmentation fault
-	//{"1.23e306", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e306, 0, 307, 3, "123", 0},
+	{"1.23e306", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e306, 0, 307, 3, "123", 0},
 	{"1.23e-306", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e-306, 0, -305, 3, "123", 0},
 	{"1.23e-320", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e-320, 0, -319, 3, "123", 0},
 	{"1.23e-20", DEFAULT_DTOA_MODE, DEFAULT_DTOA_NUM_DIGITS, 1.23e-20, 0, -19, 3, "123", 0},
@@ -129,6 +124,7 @@ static void dt_test(void** state)
 		assert_true((se - s) == test_values[i].num_digits);
 		assert_true(0 == strcmp(s, test_values[i].digits));
 		assert_true(ulpsDistanceDouble(strtod_conv, test_values[i].f) < 2);
+		freedtoa(s);
 	}
 }
 
