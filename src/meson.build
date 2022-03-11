@@ -51,10 +51,9 @@ gdtoa_sys_include = include_directories('../include', is_system: true)
 
 gdtoa_compiler_flags = [
 	#'-DNO_ERRNO',
+	'-DNO_IEEE_Scale',
 	'-DIFNAN_CHECK',
-	#'-DGDTOA_NO_ASSERT',
 	'-DNO_FENV_H',
-	'-DDEBUG',
 ]
 
 gdtoa_temporary_dep = declare_dependency(

@@ -197,7 +197,7 @@ char* dtoa(double d, int mode, int ndigits, int* decpt, int* sign, char** rve)
 #ifdef IBM
 	dval(d) += 0; /* normalize */
 #endif
-	if(fabs(dval(d)) < DBL_EPSILON)
+	if(!dval(d))
 	{
 		*decpt = 1;
 		return nrv_alloc("0", rve, 1);
@@ -285,7 +285,7 @@ else
 #endif
 ds = (dval(d2) - 1.5) * 0.289529654602168 + 0.1760912590558 + i * 0.301029995663981;
 k = (int)ds;
-if(ds < 0. && (fabs(ds - k) > DBL_EPSILON))
+if(ds < 0. && ds != k)
 {
 	k--; /* want k = floor(ds) */
 }
@@ -499,10 +499,7 @@ if(ilim >= 0 && ilim <= Quick_max && try_quick)
 		for(i = 1;; i++, dval(d) *= 10.)
 		{
 			L = (int32_t)(dval(d));
-			// Formerly if(!(dval(d) -= L))
-			dval(d) -= L;
-
-			if(fabs(dval(d)) <= DBL_EPSILON)
+			if(!(dval(d) -= L))
 			{
 				ilim = i;
 			}
@@ -567,7 +564,7 @@ if(be >= 0 && k <= Int_max)
 		}
 #endif
 		*s++ = (char)('0' + L);
-		if(fabs(dval(d)) <= DBL_EPSILON)
+		if(!dval(d))
 		{
 #ifdef SET_INEXACT
 			inexact = 0;
@@ -591,7 +588,7 @@ if(be >= 0 && k <= Int_max)
 			}
 #endif
 			dval(d) += dval(d);
-			if((dval(d) > ds) || ((fabs(dval(d) - ds) <= DBL_EPSILON) && (L & 1)))
+			if((dval(d) > ds) || ((dval(d) == ds) && (L & 1)))
 			{
 			bump_up:
 				while(*--s == '9')

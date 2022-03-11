@@ -678,7 +678,7 @@ dig_done:
 				dval(rv) = 2. * dval(rv0);
 				dval(rv) *= tinytens[j];
 #endif
-			if(fabs(dval(rv)) <= DBL_EPSILON)
+			if(!dval(rv))
 			{
 			undfl:
 				dval(rv) = 0.;
@@ -885,7 +885,7 @@ for(;;)
 		{
 			/* adj = rounding ? ceil(adj) : floor(adj); */
 			y = (uint32_t)adj;
-			if(fabs(y - adj) > DBL_EPSILON)
+			if(y != adj)
 			{
 				if(!((rounding >> 1) ^ dsign))
 				{
@@ -1055,7 +1055,7 @@ for(;;)
 		{
 			dval(rv) -= ulp(dval(rv));
 	#ifndef Sudden_Underflow
-			if(fabs(dval(rv)) <= DBL_EPSILON)
+			if(!dval(rv))
 			{
 				goto undfl;
 			}

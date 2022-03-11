@@ -124,6 +124,7 @@ int quorem(Bigint* b, Bigint* S)
 #ifdef DEBUG
 	/*debug*/ if(b->wds > n)
 	{
+		printf("b->wds: %ld, n: %ld\n", b->wds, n);
 		/*debug*/ Bug("oversize b in quorem");
 	}
 #endif
@@ -140,6 +141,7 @@ int quorem(Bigint* b, Bigint* S)
 #ifdef DEBUG
 	/*debug*/ if(q > 9)
 	{
+		printf("q: %ld\n", q);
 		/*debug*/ Bug("oversized quotient in quorem");
 	}
 #endif

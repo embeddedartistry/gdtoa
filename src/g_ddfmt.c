@@ -105,7 +105,7 @@ char* g_ddfmt(char* buf, double* dd, int ndig, unsigned bufsize)
 		goto infret;
 	}
 
-	if(fabs(dd[0] + dd[1]) <= DBL_EPSILON)
+	if(dd[0] + dd[1] == 0.)
 	{
 		b = buf;
 
@@ -131,7 +131,7 @@ char* g_ddfmt(char* buf, double* dd, int ndig, unsigned bufsize)
 
 	z = d2b(dd[0], &ex, &bx);
 
-	if(fabs(dd[1]) <= DBL_EPSILON)
+	if(dd[1] == 0.)
 	{
 		goto no_y;
 	}

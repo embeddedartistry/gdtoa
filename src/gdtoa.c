@@ -286,7 +286,7 @@ char* gdtoa(FPI* fpi, int be, uint32_t* bits, int* kindp, int mode, int ndigits,
 
 	k = (int)ds;
 
-	if(ds < 0. && (fabs(ds - k) > DBL_EPSILON))
+	if(ds < 0. && ds != k)
 	{
 		k--; /* want k = floor(ds) */
 	}
@@ -607,7 +607,7 @@ char* gdtoa(FPI* fpi, int be, uint32_t* bits, int* kindp, int mode, int ndigits,
 #endif
 			*s++ = (char)('0' + (int)L);
 
-			if(fabs(dval(d)) <= DBL_EPSILON)
+			if(dval(d) == 0.)
 			{
 				break;
 			}
@@ -627,7 +627,7 @@ char* gdtoa(FPI* fpi, int be, uint32_t* bits, int* kindp, int mode, int ndigits,
 
 				dval(d) += dval(d);
 
-				if((dval(d) > ds) || ((fabs(dval(d) - ds) <= DBL_EPSILON) && (L & 1)))
+				if((dval(d) > ds) || ((dval(d) == ds) && (L & 1)))
 				{
 				bump_up:
 					inex = STRTOG_Inexhi;
