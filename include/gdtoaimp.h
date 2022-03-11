@@ -466,7 +466,7 @@ struct Bigint
 	struct Bigint* next;
 	int k, maxwds, sign, wds;
 	uint32_t x[1];
-};
+} __attribute__((__packed__)) __attribute__((aligned(4)));
 
 typedef struct Bigint Bigint;
 
