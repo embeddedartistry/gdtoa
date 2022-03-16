@@ -810,6 +810,8 @@ if(leftright)
 		if((j < 0) || ((j == 0) && (mode != 1)
 #ifndef ROUND_BIASED
 					   && (!(word1(d) & 1)))
+#else
+			)
 #endif
 		)
 		{
