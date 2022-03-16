@@ -892,24 +892,22 @@ if(leftright)
 }
 else
 {
+	for(i = 1;; i++)
 	{
-		for(i = 1;; i++)
+		dig = quorem(b, S) + '0';
+		*s++ = (char)dig;
+		if(!b->x[0] && b->wds <= 1)
 		{
-			dig = quorem(b, S) + '0';
-			*s++ = (char)dig;
-			if(!b->x[0] && b->wds <= 1)
-			{
 #ifdef SET_INEXACT
-				inexact = 0;
+			inexact = 0;
 #endif
-				goto ret;
-			}
-			if(i >= ilim)
-			{
-				break;
-			}
-			b = multadd(b, 10, 0);
+			goto ret;
 		}
+		if(i >= ilim)
+		{
+			break;
+		}
+		b = multadd(b, 10, 0);
 	}
 }
 
