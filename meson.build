@@ -20,9 +20,9 @@ project('gdtoa',
 ################################
 
 # Pick up our common compiler variables + desired_*_flags variables
-subdir('build/compiler')
-subdir('build/compiler/c')
-subdir('build/compiler/cpp')
+subdir('meson/compiler')
+subdir('meson/compiler/c')
+subdir('meson/compiler/cpp')
 
 if get_option('debug')
 	add_project_arguments('-DDEBUG',
@@ -46,15 +46,15 @@ link_settings_list = [
 ]
 
 # Process the compilation flags
-subdir('build/compiler/check-and-apply-flags')
+subdir('meson/compiler/check-and-apply-flags')
 
 #################
 # Build Modules #
 #################
 
 # Include reusable build modules here via subdir() calls
-subdir('build/linker/linker-map')
-subdir('build/objcopy')
+subdir('meson/linker/linker-map')
+subdir('meson/objcopy')
 
 #######################
 # Process Source Tree #
@@ -72,10 +72,10 @@ subdir('test')
 # Tooling Modules #
 ###################
 
-#subdir('build/analysis/clang-tidy')
-#subdir('build/analysis/complexity')
-#subdir('build/analysis/cppcheck')
-#subdir('build/analysis/sloccount')
-#subdir('build/analysis/vale')
-subdir('build/format')
-#subdir('build/docs/doxygen')
+#subdir('meson/analysis/clang-tidy')
+#subdir('meson/analysis/complexity')
+#subdir('meson/analysis/cppcheck')
+#subdir('meson/analysis/sloccount')
+#subdir('meson/analysis/vale')
+subdir('meson/format')
+#subdir('meson/docs/doxygen')
