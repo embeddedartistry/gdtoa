@@ -33,6 +33,7 @@ THIS SOFTWARE.
 #include <float.h>
 #include <math.h>
 #include <stdint.h>
+#include <stdbool.h>
 #ifndef NO_FENV_H
 	#include <fenv.h>
 #endif
@@ -673,7 +674,7 @@ dig_done:
 			/* The last multiplication could underflow. */
 			dval(rv0) = dval(rv);
 			dval(rv) *= tinytens[j];
-			if(!dval(rv))
+			if(!(bool)dval(rv))
 			{
 				dval(rv) = 2. * dval(rv0);
 				dval(rv) *= tinytens[j];
