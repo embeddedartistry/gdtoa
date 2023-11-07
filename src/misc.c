@@ -177,7 +177,7 @@ Bigint* multadd(Bigint* b, int m, int a) /* multiply by m and add a */
 	wds = b->wds;
 	x = b->x;
 	i = 0;
-	carry = (unsigned long long)a;
+	carry = (uint64_t)a;
 
 	do
 	{
