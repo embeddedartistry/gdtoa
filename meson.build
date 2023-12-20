@@ -72,10 +72,14 @@ subdir('test')
 # Tooling Modules #
 ###################
 
-#subdir('meson/analysis/clang-tidy')
-#subdir('meson/analysis/complexity')
-#subdir('meson/analysis/cppcheck')
-#subdir('meson/analysis/sloccount')
-#subdir('meson/analysis/vale')
-subdir('meson/format')
-#subdir('meson/docs/doxygen')
+# We only need to run these tools if we are the primary project.
+# This reduces config time and target clutting when in subproject mode.
+if meson.is_subproject() == false
+	#subdir('meson/analysis/clang-tidy')
+	#subdir('meson/analysis/complexity')
+	#subdir('meson/analysis/cppcheck')
+	#subdir('meson/analysis/sloccount')
+	#subdir('meson/analysis/vale')
+	subdir('meson/format')
+	#subdir('meson/docs/doxygen')
+endif
